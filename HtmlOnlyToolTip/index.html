@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Html Only Tool Tip</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class='content'>
+      Delivery Options 
+      <button popovertarget="mypopover" popovertargetaction="show">
+        ﹖
+      </button>
+    </div>
+     <div id="mypopover" popover="auto">
+        <button id="close" popovertarget="mypopover" popovertargetaction="hide">x</button>
+       <div id='tooltip-content'>
+          <p>
+        We offer free shipping for Reebok members. 
+        Delivery times are estimates and are not guaranteed.
+       </p>
+        <p>
+          May take 1-3 days of processing time before orders ship.
+        </p>
+      <div>
+      </div>
+  </body>
+</html>

@@ -46,12 +46,15 @@ Advantages over traditional redux
 
 - RTK Query is an advanced data fetching and caching tool.
 - RTK Query itself is built on top of the Redux Toolkit core, and leverages RTK's APIs like `createSlice` and `createAsyncThunk` to implement its capabilities.
+------------------------------------------------------------------------------------
 
 2. createApi()
    Creates a `service` to use in your application.
+------------------------------------------------------------------------------------
 
 3. fetchBaseQuery()
   This is a very small wrapper around `fetch` that aims to simplify requests.
+------------------------------------------------------------------------------------
 
 4. reducerPath
 - The reducerPath is a `unique key` that your service will be mounted to in your store.
@@ -63,6 +66,7 @@ Advantages over traditional redux
 1. queryFn()
 - Can be used in place of query as an inline function that bypasses baseQuery completely for the endpoint.
  Example scenarios: 3rd party API calls
+------------------------------------------------------------------------------------
 
 2. setupListeners
 - A utility used to enable 'refetchOnMount' and 'refetchOnReconnect' behaviors. 
@@ -75,10 +79,12 @@ setupListeners(store.dispatch)
 @param dispatch — The dispatch method from your store
 
 @param customHandler — An optional callback for more granular control over listener behavior
+------------------------------------------------------------------------------------
 
 3. refetchOnReconnect
 - Defaults to false.
 - This setting allows you to control whether RTK Query will try to refetch all subscribed queries after regaining a network connection.
+------------------------------------------------------------------------------------
 
 4. refetchOnfocus
 - Defaults to false.
@@ -100,11 +106,13 @@ Example Use case : Reduces Redundant requests to server
 
     1.1 Manipulating Cache Behavior
     >> `keepUnusedDataFor`, default cache data stored for 60 seconds, we can configure this.
+------------------------------------------------------------------------------------
 
 2. Automated Re-fetching
 - Calling the refetch function will force refetch the associated query.
 - As seen in above `Default Cache Behavior`, a request will be sent only if the cache data does not already exist. If it exists, the existing data will be served instead.
 - RTK Query uses a "cache tag" system to automate re-fetching for query endpoints that have data affected by mutation endpoints.
+------------------------------------------------------------------------------------
 
 3. Conditional Fetching
 `skip`
@@ -125,3 +133,37 @@ Example Use case : Reduces Redundant requests to server
 
 -----
 
+rtk-query-demo-2
+1. useLazyQuery vs useQuery
+
+- React hook similar to useQuery, but with manual control over when the data fetching occurs.
+- This is useful when you want to delay fetching data until a `specific condition` is met or until a user action occurs.
+
+> const [trigger, result, lastPromiseInfo] = useLazyGetProductsQuery(options)
+
+
+When the trigger function returned from a LazyQuery is called, it always initiates a new request to the server even if there is cached data. Set preferCacheValue(the second argument to the function) as true if you want it to immediately return a cached value if one exists.
+2. Prefetching
+
+The goal of prefetching is to make data `fetch before the user navigates` to a page or attempts to load some known content.
+
+Use cases:
+
+- User hovers over a navigation element
+- User hovers over a list element that is a link
+- User hovers over a next pagination button
+- User navigates to a page and you know that some components down the tree will require said data. This way, you can prevent fetching waterfalls.
+
+3. Polling
+- Polling gives you the ability to have a 'real-time' effect by causing a query to run at a specified interval.
+- To enable polling for a query, pass a pollingInterval to the useQuery hook or action creator with an interval in milliseconds:
+
+
+
+
+1. createSelector
+ - in we can rtk query to access cached data
+2. Code Splitting
+ - Reduced Initial Bundle Size
+ - Organized code
+ - Can be used for big projects

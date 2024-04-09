@@ -1,0 +1,38 @@
+{
+    "data": {
+      "Query": {
+        "hello": {
+          "type": "String",
+          "resolve": null
+        }
+      }
+    },
+    "definitions": [
+      {
+        "kind": "ObjectTypeDefinition",
+        "name": {
+          "kind": "Name",
+          "value": "Query"
+        },
+        "fields": [
+          {
+            "kind": "FieldDefinition",
+            "name": {
+              "kind": "Name",
+              "value": "hello"
+            },
+            "type": {
+              "kind": "NamedType",
+              "name": {
+                "kind": "Name",
+                "value": "String"
+              }
+            },
+            "resolve": null
+          }
+        ]
+      }
+    ],
+    "directives": []
+  }
+  
